@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-export default function AssentoPage() {
+export default function AssentoPage({func}) {
    
     let p = useParams()
     p = p.idSessao
@@ -39,6 +39,7 @@ export default function AssentoPage() {
 
         const tratarSucesso = (resposta) =>{
             console.log(resposta)
+            
             alert("Sucesso!!!")
         }
         const obj = {
@@ -46,6 +47,16 @@ export default function AssentoPage() {
             name: nome,
             cpf: cpf
         }
+        const obj2 ={
+            assent: assentSelec,
+            name: nome,
+            cpf: cpf,
+            title: dataSeat.movie.title,
+            dia: dataSeat.day.date,
+            hora: dataSeat.day.weekday
+        }
+        func(obj2)
+        
         console.log(obj)
         //React.useEffect(()=>{},[])
         const requisicao = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', obj);
@@ -55,7 +66,7 @@ export default function AssentoPage() {
     React.useEffect(()=>{
     
         const  processarResposta = (resposta) => {
-            //console.log(resposta.data);
+            console.log(resposta.data);
             //console.log(resposta.data.movie.title);
             setAssento(resposta.data.seats)
             setDtSeat(resposta.data)

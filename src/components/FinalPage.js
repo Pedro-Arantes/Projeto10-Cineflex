@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 
 
-export default function FinalPage(){
+export default function FinalPage({dados}){
 
-
+const arr = dados.assent
     return(
         <MainStyle>
         <FinalStyle>
@@ -14,18 +14,17 @@ export default function FinalPage(){
                 <ListaPedido>
                     <div>
                         <h3>Filme e sessão</h3>
-                        <p>Enola Holmes<br />
-                            24/06/2021 15:00</p>
+                        <p>{dados.title}<br />
+                            {dados.dia} {dados.hora}</p>
                     </div>
                     <div>
                         <h3>Ingressos</h3>
-                        <p>Assento 15<br />
-                            Assento 16</p>
+                        {arr.map((item,i)=> <p key={i}>Assento {item}<br /></p>)}
                     </div>
                     <div>
                         <h3>Comprador</h3>
-                        <p>Nome: João da Silva Sauro<br />
-                            CPF: 123.456.789-10</p>
+                        <p>Nome: {dados.name}<br />
+                            CPF: {dados.cpf}</p>
                     </div>
                 </ListaPedido>
 
