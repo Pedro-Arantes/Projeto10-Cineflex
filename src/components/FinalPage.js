@@ -3,12 +3,28 @@ import styled from 'styled-components';
 
 
 
-export default function FinalPage({dados}){
+export default function FinalPage({ dados }) {
 
-const arr = dados.assent
-    return(
+    if (dados === '') {
+        return (
+            <MainStyle>
+                <FinalStyle>
+                    <BtnDivReser>
+                        <Link to="/">
+                            <button>Voltar pra Home</button>
+                        </Link>
+                    </BtnDivReser>
+                </FinalStyle>
+
+            </MainStyle>
+
+
+        )
+    }
+    const arr = dados.assent
+    return (
         <MainStyle>
-        <FinalStyle>
+            <FinalStyle>
                 <h2>Pedido feito<br />
                     com sucesso!</h2>
                 <ListaPedido>
@@ -19,7 +35,7 @@ const arr = dados.assent
                     </div>
                     <div>
                         <h3>Ingressos</h3>
-                        {arr.map((item,i)=> <p key={i}>Assento {item}<br /></p>)}
+                        {arr.map((item, i) => <p key={i}>Assento {item}<br /></p>)}
                     </div>
                     <div>
                         <h3>Comprador</h3>
@@ -30,15 +46,15 @@ const arr = dados.assent
 
                 <BtnDivReser>
                     <Link to="/">
-                    <button>Voltar pra Home</button>
+                        <button>Voltar pra Home</button>
                     </Link>
-                    
+
                 </BtnDivReser>
 
             </FinalStyle>
-            
+
         </MainStyle>
-        
+
     )
 }
 

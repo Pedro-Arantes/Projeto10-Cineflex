@@ -11,9 +11,9 @@ export default function Assentos({ num, item, func }) {
     const ChooseSeat = () => {
 
         if (item.isAvailable && (color === "" || color === "white")) {
-            setColor("#1AAE9E")
+            setColor("#ffff00")
             func(true, num,item.id)
-        } else if (color === "#1AAE9E") {
+        } else if (color === "#ffff00") {
             setColor("white")
             func(false, num,item.id)
         }
@@ -39,4 +39,5 @@ height: 26px;
 border-radius: 12px;
 border-style: none;
 background-color:${props => props.color === "" ? props.state : props.color};
+
 `

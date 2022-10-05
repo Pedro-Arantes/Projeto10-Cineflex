@@ -4,10 +4,10 @@ import React from "react"
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 export default function AssentoPage({func}) {
-   
+    const navigate = useNavigate();
     let p = useParams()
     p = p.idSessao
     const[assentos,setAssento] = React.useState([])
@@ -76,6 +76,12 @@ export default function AssentoPage({func}) {
         promessa.then(processarResposta);
     },[p])
 
+    const submit = (e)=>{
+
+        e.preventDefault();
+        navigate("/sucesso")
+    }
+
 
 return (
     <MainStyle>
@@ -100,24 +106,23 @@ return (
                     </div>
                 </LegendaStyle>
 
-                <FormStyle>
+                <FormStyle  onSubmit={submit} name="form">
                     <div>
                         <label>Nome do comprador:</label>
-                        <input value={nome} onChange={e=> setNome(e.target.value)} placeholder="Digite seu nome..." ></input>
+                        <input required value={nome} onChange={e=> setNome(e.target.value)} placeholder="Digite seu nome..." ></input>
                     </div>
 
                     <div>
                         <label>CPF do comprador:</label>
-                        <input  value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
+                        <input  required value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
                     </div>
-                </FormStyle>
-
-                <BtnDivReser>
-                    <Link to="/sucesso">
-                        <button onClick={FinalizaPedido}>Reservar assento(s)</button>
-                    </Link>
-
+                    <BtnDivReser>
+                        <button type="submit" for="form"   onClick={FinalizaPedido}  >Reservar assento(s)</button>
                 </BtnDivReser>
+                    
+                </FormStyle>
+                
+                
             </div>
 
         </AssentoStyle>
@@ -203,7 +208,7 @@ button{
 }
 `
 const BtnSelec = styled.button`
-background-color: #1AAE9E;
+background-color: #ffff00;
 `
 
 const BtnDispo = styled.button`
