@@ -40,7 +40,7 @@ export default function AssentoPage({func}) {
         const tratarSucesso = (resposta) =>{
             console.log(resposta)
             
-            alert("Sucesso!!!")
+            
         }
         const obj = {
             ids: assentId,
@@ -117,7 +117,7 @@ return (
                         <input  required value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
                     </div>
                     <BtnDivReser>
-                        <button type="submit" for="form"   onClick={FinalizaPedido}  >Reservar assento(s)</button>
+                        <button type="submit"    onClick={FinalizaPedido}  >Reservar assento(s)</button>
                 </BtnDivReser>
                     
                 </FormStyle>
@@ -126,7 +126,7 @@ return (
             </div>
 
         </AssentoStyle>
-        <Footer  title={dataSeat === "" ?  "": dataSeat.movie.title}  url={dataSeat === "" ?  "": dataSeat.movie.posterURL}dia={dataSeat === "" ?  "": dataSeat.day.date} hora={dataSeat === "" ?  "": dataSeat.day.weekday}/>
+        <Footer  title={dataSeat === "" ?  "": dataSeat.movie.title}  url={dataSeat === "" ?  "": dataSeat.movie.posterURL}dia={dataSeat === "" ?  "": dataSeat.day.weekday } hora={dataSeat === "" ?  "": dataSeat.name }/>
     </MainStyle>
 
 )
@@ -141,15 +141,17 @@ height: 100%;
 
 const AssentoStyle = styled.section`
 height: 680px;
-
+width: 100%;
 
 background-color: rgb(86,86,96);
 
 margin-top: 80px;
 margin-bottom: 117px;
 display: flex;
+flex-direction: column;
 flex-wrap: wrap;
 justify-content: center;
+align-items: center;
 
 
 
