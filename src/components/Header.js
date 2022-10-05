@@ -19,7 +19,7 @@ top: 0;
 left: 0;
 right: 0;
 background-color: black;
-
+z-index: 2;
 display: flex;
 align-items: center;
 justify-content: center;

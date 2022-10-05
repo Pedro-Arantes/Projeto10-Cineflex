@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-export default function Footer() {
-
+export default function Footer({title,url,dia,hora}) {
+console.log(url)
     return (
 
         <FooterStyled>
             <figure>
-                <img src="https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"></img>
+                <img alt="" src={url}></img>
             </figure>
             <div>
-                <h3>2067</h3>
-                <h3>Quinta-feira - 15:00</h3>
+                <h3>{title}</h3>
+                <h3>{dia}{dia !== "" ? "-":""}{hora}</h3>
             </div>
 
         </FooterStyled>
