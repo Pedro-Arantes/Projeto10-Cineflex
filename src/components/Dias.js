@@ -2,15 +2,16 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export default function Dias({days}) {
-
+  const id1 = days.showtimes[0].id
+  const id2 = days.showtimes[1].id
 
     return (
 
         <DiaDivStyle>
             <h4>{days.weekday}-{days.date}</h4>
             <div>
-                <Link to="/assentos"><button>{days.showtimes[0].name}</button></Link>
-                <Link to="/assentos"><button>{days.showtimes[1].name}</button></Link>
+                <Link to={"/assentos/"+ id1}><button>{days.showtimes[0].name}</button></Link>
+                <Link to={"/assentos/" + id2}><button>{days.showtimes[1].name}</button></Link>
             </div>
         </DiaDivStyle>
     )

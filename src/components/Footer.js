@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default function Footer({title,url,dia,hora}) {
-console.log(url)
+
     return (
 
         <FooterStyled>

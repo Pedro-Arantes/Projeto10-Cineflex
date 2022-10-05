@@ -2,28 +2,77 @@ import styled from 'styled-components';
 import Assentos from './Assentos';
 import React from "react"
 import Footer from './Footer';
+import { useParams } from 'react-router-dom';
+import axios from "axios";
 import { Link } from 'react-router-dom';
 
 export default function AssentoPage() {
-    let array = []
-
+   
+    let p = useParams()
+    p = p.idSessao
+    const[assentos,setAssento] = React.useState([])
+    const[assentSelec,setAssent] = React.useState([])
+    const[assentId,setAssentId] = React.useState([])
+    const[dataSeat,setDtSeat] = React.useState("")
+    const[nome,setNome] = React.useState("")
+    const[cpf,setCPF] = React.useState("")
     
-
-    const CriaArray = () => {
-        for (let i = 1; i < 51; i++) {
-            array.push(i)
-
+    const selectSeat = (state,seat,id) =>{
+        if (state) {
+            const arr = [...assentSelec,seat]
+            const arr2 = [...assentId,id]
+            //console.log(arr)
+            //console.log(arr2)
+            setAssent(arr)
+            setAssentId(arr2)
+        }else{
+            const arr = assentSelec.filter((item)=>item !== seat)
+            const arr2 = assentId.filter((item)=>item !== id)
+            //console.log(arr)
+            //console.log(arr2)
+            setAssent(arr)
+            setAssentId(arr2)
         }
     }
-    CriaArray();
 
-    return (
-        <MainStyle>
-            <AssentoStyle>
-                <h2>Selecione o(s) assento(s)</h2>
-                <div>
+    const FinalizaPedido = () =>{
+
+        const tratarSucesso = (resposta) =>{
+            console.log(resposta)
+            alert("Sucesso!!!")
+        }
+        const obj = {
+            ids: assentId,
+            name: nome,
+            cpf: cpf
+        }
+        console.log(obj)
+        //React.useEffect(()=>{},[])
+        const requisicao = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', obj);
+        requisicao.then(tratarSucesso)
+    }
+
+    React.useEffect(()=>{
+    
+        const  processarResposta = (resposta) => {
+            //console.log(resposta.data);
+            //console.log(resposta.data.movie.title);
+            setAssento(resposta.data.seats)
+            setDtSeat(resposta.data)
+        }
+        const url = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${p}/seats`
+        const promessa = axios.get(url);
+        promessa.then(processarResposta);
+    },[p])
+
+
+return (
+    <MainStyle>
+        <AssentoStyle>
+            <h2>Selecione o(s) assento(s)</h2>
+            <div>
                 <ListaBtnStyle>
-                    {array.map((item, i) => <Assentos key={i} num={item} />)}
+                    {assentos.map((item, i) => <Assentos func = {selectSeat}key={i} item={item}num={item.name} />)}
                 </ListaBtnStyle>
                 <LegendaStyle>
                     <div>
@@ -43,28 +92,28 @@ export default function AssentoPage() {
                 <FormStyle>
                     <div>
                         <label>Nome do comprador:</label>
-                        <input placeholder="Digite seu nome..." ></input>
+                        <input value={nome} onChange={e=> setNome(e.target.value)} placeholder="Digite seu nome..." ></input>
                     </div>
 
                     <div>
                         <label>CPF do comprador:</label>
-                        <input placeholder="Digite seu CPF..." ></input>
+                        <input  value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
                     </div>
                 </FormStyle>
 
                 <BtnDivReser>
-                    <Link to="/final">
-                    <button>Reservar assento(s)</button>
+                    <Link to="/sucesso">
+                        <button onClick={FinalizaPedido}>Reservar assento(s)</button>
                     </Link>
-                    
-                </BtnDivReser>
-                </div>
-                
-            </AssentoStyle>
-            <Footer />
-        </MainStyle>
 
-    )
+                </BtnDivReser>
+            </div>
+
+        </AssentoStyle>
+        <Footer  title={dataSeat === "" ?  "": dataSeat.movie.title}  url={dataSeat === "" ?  "": dataSeat.movie.posterURL}dia={dataSeat === "" ?  "": dataSeat.day.date} hora={dataSeat === "" ?  "": dataSeat.day.weekday}/>
+    </MainStyle>
+
+)
 }
 
 const MainStyle = styled.main`
