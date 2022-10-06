@@ -77,7 +77,7 @@ export default function AssentoPage({func}) {
     },[p])
 
     const submit = (e)=>{
-
+        FinalizaPedido()
         e.preventDefault();
         navigate("/sucesso")
     }
@@ -117,7 +117,7 @@ return (
                         <input  required value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
                     </div>
                     <BtnDivReser>
-                        <button type="submit"    onClick={FinalizaPedido}  >Reservar assento(s)</button>
+                        <button type="submit"     >Reservar assento(s)</button>
                 </BtnDivReser>
                     
                 </FormStyle>
