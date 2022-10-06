@@ -114,7 +114,7 @@ return (
 
                     <div>
                         <label>CPF do comprador:</label>
-                        <input  required value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
+                        <input  pattern="\d{3}.?\d{3}.?\d{3}-?\d{2}"  required value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
                     </div>
                     <BtnDivReser>
                         <button type="submit"     >Reservar assento(s)</button>

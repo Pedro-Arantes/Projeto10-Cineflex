@@ -4,7 +4,12 @@ import styled from 'styled-components';
 
 
 export default function FinalPage({ dados }) {
-
+    let  CPF = dados.cpf
+    CPF = CPF.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, 
+    function( regex, argumento1, argumento2, argumento3, argumento4 ) {
+           return argumento1 + '.' + argumento2 + '.' + argumento3 + '-' + argumento4;
+   })
+   
     if (dados === '') {
         return (
             <MainStyle>
@@ -40,7 +45,7 @@ export default function FinalPage({ dados }) {
                     <div>
                         <h3>Comprador</h3>
                         <p>Nome: {dados.name}<br />
-                            CPF: {dados.cpf}</p>
+                            CPF: {CPF}</p>
                     </div>
                 </ListaPedido>
 
