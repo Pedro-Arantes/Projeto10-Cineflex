@@ -35,23 +35,23 @@ export default function FinalPage({ dados }) {
                 <ListaPedido>
                     <div>
                         <h3>Filme e sessão</h3>
-                        <p>{dados.title}<br />
+                        <p data-identifier="movie-session-infos-reserve-finished" >{dados.title}<br />
                             {dados.dia} {dados.hora}</p>
                     </div>
                     <div>
                         <h3>Ingressos</h3>
-                        {arr.map((item, i) => <p key={i}>Assento {item}<br /></p>)}
+                        {arr.map((item, i) => <p data-identifier="seat-infos-reserve-finished" key={i}>Assento {item}<br /></p>)}
                     </div>
                     <div>
                         <h3>Comprador</h3>
-                        <p>Nome: {dados.name}<br />
+                        <p data-identifier="buyer-infos-reserve-finished" >Nome: {dados.name}<br />
                             CPF: {CPF}</p>
                     </div>
                 </ListaPedido>
 
                 <BtnDivReser>
                     <Link to="/">
-                        <button>Voltar pra Home</button>
+                        <button data-identifier="back-to-home-btn" >Voltar pra Home</button>
                     </Link>
 
                 </BtnDivReser>

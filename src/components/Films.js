@@ -6,7 +6,7 @@ export default function Films({link,ident}) {
 
     return (
         <Link to={"/sessoes/"+ident}>
-            <figure>
+            <figure data-identifier="movie-outdoor">
             <img alt="" src={link}/>
             </figure>
         </Link>

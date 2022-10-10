@@ -6,10 +6,10 @@ import { useParams } from 'react-router-dom';
 import Dias from './Dias';
 
 export default function SessoesPage() {
-//
 
 
-const [v,setV]= React.useState([])
+
+const [days,setDay]= React.useState([])
 const [data,setData]= React.useState([])
 
 let p = useParams()
@@ -17,13 +17,17 @@ p = p.idFilme
 React.useEffect(()=>{
     
     const  processarResposta = (resposta) => {
-        console.log(resposta.data);
+        
         setData(resposta.data)
-        setV(resposta.data.days)
+        setDay(resposta.data.days)
+    }
+    const processaErro = (erro) =>{
+        alert(erro.response.data)
     }
     const url = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${p}/showtimes`
     const promessa = axios.get(url);
     promessa.then(processarResposta);
+    promessa.catch(processaErro);
 },[p])
 
     return (
@@ -31,7 +35,7 @@ React.useEffect(()=>{
             <HorarioStyle>
                 <h2>Selecione o Horário</h2>
                 <ListaHorarios>
-                    {v.map((item,i)=> <Dias key = {i} days={item}/> )}
+                    {days.map((item,i)=> <Dias key = {i} days={item}/> )}
                 </ListaHorarios>
             </HorarioStyle>
             <Footer title={data.title} url={data.posterURL} dia={''} hora={''}/>

@@ -8,10 +8,10 @@ export default function Dias({days}) {
     return (
 
         <DiaDivStyle>
-            <h4>{days.weekday}-{days.date}</h4>
+            <h4 data-identifier="session-date" >{days.weekday}-{days.date}</h4>
             <div>
-                <Link to={"/assentos/"+ id1}><button>{days.showtimes[0].name}</button></Link>
-                <Link to={"/assentos/" + id2}><button>{days.showtimes[1].name}</button></Link>
+                <Link to={"/assentos/"+ id1}><button data-identifier="hour-minute-btn">{days.showtimes[0].name}</button></Link>
+                <Link to={"/assentos/" + id2}><button data-identifier="hour-minute-btn">{days.showtimes[1].name}</button></Link>
             </div>
         </DiaDivStyle>
     )

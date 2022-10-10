@@ -21,15 +21,13 @@ export default function AssentoPage({func}) {
         if (state) {
             const arr = [...assentSelec,seat]
             const arr2 = [...assentId,id]
-            //console.log(arr)
-            //console.log(arr2)
+            
             setAssent(arr)
             setAssentId(arr2)
         }else{
             const arr = assentSelec.filter((item)=>item !== seat)
             const arr2 = assentId.filter((item)=>item !== id)
-            //console.log(arr)
-            //console.log(arr2)
+            
             setAssent(arr)
             setAssentId(arr2)
         }
@@ -38,7 +36,7 @@ export default function AssentoPage({func}) {
     const FinalizaPedido = () =>{
 
         const tratarSucesso = (resposta) =>{
-            console.log(resposta)
+            
             
             
         }
@@ -57,8 +55,6 @@ export default function AssentoPage({func}) {
         }
         func(obj2)
         
-        console.log(obj)
-        //React.useEffect(()=>{},[])
         const requisicao = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', obj);
         requisicao.then(tratarSucesso)
     }
@@ -66,14 +62,17 @@ export default function AssentoPage({func}) {
     React.useEffect(()=>{
     
         const  processarResposta = (resposta) => {
-            console.log(resposta.data);
-            //console.log(resposta.data.movie.title);
-            setAssento(resposta.data.seats)
-            setDtSeat(resposta.data)
+            
+            setAssento(resposta.data.seats);
+            setDtSeat(resposta.data);
+        }
+        const processaErro = (erro) =>{
+            alert(erro.response.data);
         }
         const url = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${p}/seats`
         const promessa = axios.get(url);
         promessa.then(processarResposta);
+        promessa.catch(processaErro);
     },[p])
 
     const submit = (e)=>{
@@ -93,15 +92,15 @@ return (
                 </ListaBtnStyle>
                 <LegendaStyle>
                     <div>
-                        <BtnSelec></BtnSelec>
+                        <BtnSelec data-identifier="seat-selected-subtitle" ></BtnSelec>
                         <h5>Selecionado</h5>
                     </div>
                     <div>
-                        <BtnDispo></BtnDispo>
+                        <BtnDispo data-identifier="seat-available-subtitle" ></BtnDispo>
                         <h5>Disponível</h5>
                     </div>
                     <div>
-                        <BtnIndispo></BtnIndispo>
+                        <BtnIndispo data-identifier="seat-unavailable-subtitle" ></BtnIndispo>
                         <h5>Indisponível</h5>
                     </div>
                 </LegendaStyle>
@@ -109,15 +108,15 @@ return (
                 <FormStyle  onSubmit={submit} name="form">
                     <div>
                         <label>Nome do comprador:</label>
-                        <input required value={nome} onChange={e=> setNome(e.target.value)} placeholder="Digite seu nome..." ></input>
+                        <input data-identifier="buyer-name-input"  required value={nome} onChange={e=> setNome(e.target.value)} placeholder="Digite seu nome..." ></input>
                     </div>
 
                     <div>
                         <label>CPF do comprador:</label>
-                        <input  pattern="\d{3}.?\d{3}.?\d{3}-?\d{2}"  required value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
+                        <input  data-identifier="buyer-cpf-input" pattern="\d{3}.?\d{3}.?\d{3}-?\d{2}"  required value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." ></input>
                     </div>
                     <BtnDivReser>
-                        <button type="submit"     >Reservar assento(s)</button>
+                        <button data-identifier="reservation-btn" type="submit"     >Reservar assento(s)</button>
                 </BtnDivReser>
                     
                 </FormStyle>

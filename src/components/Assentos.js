@@ -25,7 +25,7 @@ export default function Assentos({ num, item, func }) {
 
     return (
 
-        <BtnStyle onClick={ChooseSeat} color={color} state={color1}>
+        <BtnStyle  data-identifier="seat"  onClick={ChooseSeat} color={color} state={color1}>
             {num < 10 ? "0" + num : num}
         </BtnStyle>
     )

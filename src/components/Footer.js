@@ -5,10 +5,10 @@ export default function Footer({title,url,dia,hora}) {
     return (
 
         <FooterStyled>
-            <figure>
+            <figure data-identifier="movie-img-preview" >
                 <img alt="" src={url}></img>
             </figure>
-            <div>
+            <div data-identifier="movie-and-session-infos-preview">
                 <h3>{title}</h3>
                 <h3>{dia}{dia !== "" ? "-":""}{hora}</h3>
             </div>
