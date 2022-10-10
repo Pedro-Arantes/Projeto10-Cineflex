@@ -36,9 +36,7 @@ export default function AssentoPage({func}) {
     const FinalizaPedido = () =>{
 
         const tratarSucesso = (resposta) =>{
-            
-            
-            
+            console.log(resposta)
         }
         const obj = {
             ids: assentId,
